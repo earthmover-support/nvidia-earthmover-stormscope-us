@@ -10,7 +10,8 @@ set -euo pipefail
 trap 'echo "[bootstrap] FAILED at line $LINENO (exit $?): $BASH_COMMAND"' ERR
 step() { echo "[bootstrap] $(date -u +%H:%M:%S) $*"; }
 
-EARTH2STUDIO_VERSION=0.20.0
+# earth2studio main: no release has the missing-band fix (NVIDIA/earth2studio#1421) yet.
+EARTH2STUDIO_COMMIT=18db89dc99542a728b3611297ef48a2eb60c7806
 EARTH2GRID_COMMIT=11dcf1b0787a7eb6a8497a3a5a5e1fdcc31232d3
 PY=$(command -v python)
 step "python: $PY ($($PY --version 2>&1))"
@@ -24,7 +25,8 @@ if ! $PY -c "import natten, earth2grid, earth2studio, pyorbital, pyspectral" 2>/
         | grep -iE '^(torch|torchvision|torchaudio|triton|nvidia-physicsnemo|numpy)==' \
         > /tmp/base-constraints.txt
     $PY -m pip install -q --root-user-action=ignore --no-cache-dir -c /tmp/base-constraints.txt \
-        "earth2studio==${EARTH2STUDIO_VERSION}" "icechunk>=2.2" "arraylake>=1.3" \
+        "earth2studio @ https://github.com/NVIDIA/earth2studio/archive/${EARTH2STUDIO_COMMIT}.tar.gz" \
+        "icechunk>=2.2" "arraylake>=1.3" \
         "pyproj>=3.7.1" "scipy>=1.15.2" "nvtx>=0.2.11" "omegaconf>=2.3.0" python-dotenv \
         "pyorbital>=1.14.0" "pyspectral>=0.14.3"
     step "pip: natten"
