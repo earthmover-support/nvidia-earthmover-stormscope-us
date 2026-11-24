@@ -84,8 +84,9 @@ The page takes "here" from the first of these that applies:
    stays on screen. The root README [lists the link for each event](../README.md#events).
 3. `location` in `config.json`, which is `"SC26 Chicago"`.
 
-Options 2 and 3 name an entry in `venues` (`lat`, `lon`, `timezone`, `dates`), the venue
-chips on slide 8. Add a new venue there first, and to `VENUES` in
+Options 2 and 3 name an entry in `venues` (`city`, `lat`, `lon`, `timezone`, `dates`), the venue
+chips on slide 8. The entry's name is the key in URLs; the marker and the chips show its
+`city`. Add a new venue there first, and to `VENUES` in
 [`site/index.html`](../site/index.html).
 
 ## Before the event

@@ -280,9 +280,12 @@
   let recenter = () => {}; // set by initGlobe: moves the camera home so "here" is on screen
   function renderHere() {
     if (!hereMarker) return;
-    hereMarker.getElement().querySelector("span").textContent = S.here.name ? `${S.here.name}\nyou are here` : "you are here";
+    hereMarker.getElement().querySelector("span").textContent = S.here.name ? `${cityOf(S.here.name)}\nyou are here` : "you are here";
     hereMarker.setLngLat([S.here.lon, S.here.lat]);
   }
+
+  // Venue names are keys (?location=, SQL places, the viewer QR); the screen shows the city.
+  const cityOf = (name) => S.cfg.venues[name]?.city ?? name;
 
   // The venue: ?location=<venues name> for this screen, else config.json location.
   function venue() {
@@ -951,7 +954,7 @@
     // replaces it (newest wins)
     if (places.children.length !== names.length) {
       places.replaceChildren(...names.map((name) => {
-        const b = el("button", null, name);
+        const b = el("button", null, cityOf(name));
         b.type = "button";
         b.addEventListener("click", () => {
           if (name === MY) return useMyLocation();
