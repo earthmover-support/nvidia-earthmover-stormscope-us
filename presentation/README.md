@@ -113,7 +113,7 @@ chips on slide 8. Add a new venue there first, and to `VENUES` in
 
    Panel 08 is a live editor. Click a venue chip (`venues`), or type any single
    `SELECT` or `WITH` statement and press ⌘/Ctrl+Enter. Esc leaves the box. The venue
-   chips are the events in date order: SC26 Chicago, GTC DC, AGU26 San Francisco,
+   chips are the events in date order: SC26 Chicago, GTC DC, AGU26 SF,
    AMS 2027 Denver, GTC San Jose. A chip fills the editor and runs the query at once.
    Reset only fills the editor.
 
