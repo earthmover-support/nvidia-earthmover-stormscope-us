@@ -26,7 +26,7 @@ if ! $PY -c "import natten, earth2grid, earth2studio, pyorbital, pyspectral" 2>/
     $PY -m pip install -q --root-user-action=ignore --no-cache-dir -c /tmp/base-constraints.txt \
         "earth2studio==${EARTH2STUDIO_VERSION}" "icechunk>=2.2" "arraylake>=1.3" \
         "pyproj>=3.7.1" "scipy>=1.15.2" "nvtx>=0.2.11" "omegaconf>=2.3.0" python-dotenv \
-        "pyorbital>=1.14.0" "pyspectral>=0.14.3"
+        "pyorbital==1.14.0" "pyspectral==0.14.3"  # = uv.lock; 0.14.4 wants a new RSR download
     step "pip: natten"
     $PY -m pip install -q --root-user-action=ignore natten==0.21.7+torch2130cu132 -f https://whl.natten.org
     step "pip: earth2grid (source build)"

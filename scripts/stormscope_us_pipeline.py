@@ -50,6 +50,7 @@ Usage:
 """
 
 import argparse
+import logging
 import os
 import re
 import time
@@ -114,6 +115,23 @@ GOES_SUBSAT_LON, GOES_ALT_KM = -75.2, 35786.0
 # resolution, within 1 byte for 99.9 % of pixels (docs/END2END_NEARREALTIME_PERFORMANCE.md).
 GEOMETRY_STRIDE = 8
 _rayleigh = None  # pyspectral corrector, loaded (and its LUT downloaded) on first use
+# Wavelengths (um) for the Rayleigh lookup: the nominal ABI band centres, as satpy's
+# `abi_l1b` reader defines them and as satpy passes to pyspectral when it has no spectral
+# response. With a band name instead, pyspectral downloads its spectral response
+# file from Zenodo on first use (and again after each new pyspectral release), and Zenodo
+# refuses automated downloads from cloud VMs with 403 Forbidden.
+RAYLEIGH_WAVELENGTH_UM = {"C01": 0.47, "C02": 0.64}
+
+
+class _DropWavelengthNotice(logging.Filter):
+    """Drop pyspectral's warning that it got a wavelength instead of a band name, which
+    it logs on every lookup (twice per frame); the wavelengths above are deliberate."""
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        return not record.getMessage().startswith("A wavelength is provided instead of band")
+
+
+logging.getLogger("pyspectral.rayleigh").addFilter(_DropWavelengthNotice())
 
 
 def _upsample(coarse: np.ndarray, shape: tuple[int, int], stride: int) -> np.ndarray:
@@ -176,7 +194,11 @@ def true_color_fields(
     azidiff = np.where(azidiff > 180, 360 - azidiff, azidiff)
     shape = np.shape(lat)
     path = [
-        _upsample(_rayleigh.get_reflectance(sunz, satz, azidiff, band), shape, stride)
+        _upsample(
+            _rayleigh.get_reflectance(sunz, satz, azidiff, RAYLEIGH_WAVELENGTH_UM[band]),
+            shape,
+            stride,
+        )
         for band in ("C01", "C02")
     ]
     sunz = _upsample(sunz, shape, stride)

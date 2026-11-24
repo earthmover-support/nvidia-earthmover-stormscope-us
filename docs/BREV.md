@@ -79,6 +79,12 @@ booth hours and after the event; stopping the service alone does not stop billin
 - The NGC container `physicsnemo:26.08` uses CUDA 13.2. The setup log prints the host
   driver version (`nvidia-smi`). If the bootstrap's torch CUDA check fails, the VM's
   driver is too old for the container; pick another instance type or provider.
+- pyspectral downloads its Rayleigh lookup tables (`rayleigh_only`) from Zenodo on the
+  first start and keeps them in `/var/lib/stormscope-us/cache/xdg-data/pyspectral/`.
+  Zenodo can refuse automated downloads (`403 Forbidden`, seen from cloud VMs and from a
+  workstation in November 2026). If a fresh VM fails there, copy that folder from a VM or
+  machine that has it, then restart the service. The pipeline passes wavelengths, not band
+  names, so pyspectral does not need its second Zenodo file, the spectral responses.
 - All runs into the same Arraylake repo must use the same `--n-steps` and `--region`
   (see the README). The service fixes `--n-steps 12` and full CONUS; do not run it next to
   a Coiled deployment with other settings.
