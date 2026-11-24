@@ -1294,7 +1294,6 @@
     S.cfg = await (await fetch("/api/config")).json();
     const v = venue();
     setTimezone(v.timezone); // stays the venue's even when locate() moves "here"
-    $("#demoEvent").textContent = v.name;
     if (BLOG_URL) Object.assign($("#blogLink"), { href: BLOG_URL, hidden: false });
     if (S.cfg.playback_speed in SPEEDS) S.speed = S.cfg.playback_speed;
     S.here = v; // the browser's location replaces it in locate(), if allowed
