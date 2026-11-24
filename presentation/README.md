@@ -115,7 +115,7 @@ chips on slide 8. The entry's name is the key in URLs; the marker and the chips 
    Panel 08 is a live editor. Click a venue chip (`venues`), or type any single
    `SELECT` or `WITH` statement and press ⌘/Ctrl+Enter. Esc leaves the box. The venue
    chips follow the order of `venues`, labelled by city: Washington, DC, Chicago,
-   Denver, San Francisco. A venue with `"chip": false` (GTC San Jose) has no chip. A chip fills the editor and runs the query at once.
+   Denver, San Francisco. A chip fills the editor and runs the query at once.
    Reset only fills the editor.
 
    The server runs the query with the token. The browser never sees the token. For each

@@ -20,7 +20,7 @@ demo note. The QR code on the screen passes the venue on to the mobile viewer.
 | GTC DC | 2026-11-30 to 12-03 | Walter E. Washington Convention Center | America/New_York | [link](https://nvidia-sc26-chicago.earthmover.io/?location=GTC%20DC) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=GTC%20DC) |
 | AGU26 SF | 2026-12-07 to 12-11 | Moscone Center, San Francisco | America/Los_Angeles | [link](https://nvidia-sc26-chicago.earthmover.io/?location=AGU26%20SF) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=AGU26%20SF) |
 | AMS 2027 Denver | 2027-01-10 to 01-14 | Colorado Convention Center | America/Denver | [link](https://nvidia-sc26-chicago.earthmover.io/?location=AMS%202027%20Denver) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=AMS%202027%20Denver) |
-| GTC San Jose | 2027-03-15 to 03-18 | San Jose McEnery Convention Center | America/Los_Angeles | [link](https://nvidia-sc26-chicago.earthmover.io/?location=GTC%20San%20Jose) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=GTC%20San%20Jose) |
+| GTC San Jose | 2027-03-15 to 03-18 | San Jose McEnery Convention Center | America/Los_Angeles | removed | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=GTC%20San%20Jose) |
 
 To add an event, add it to `venues` in `presentation/config.json` and to `VENUES` in
 [`site/index.html`](site/index.html), with the same name.
