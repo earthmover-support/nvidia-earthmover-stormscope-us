@@ -953,7 +953,8 @@
 
   function renderSqlPlaces() {
     const places = $("#sqlPlaces");
-    const names = [...Object.keys(S.cfg.sql_places), ...(myLocationAllowed() ? [MY] : [])];
+    // "chip": false keeps a venue (its ?location= link still works) without offering it here
+    const names = [...Object.keys(S.cfg.sql_places).filter((n) => S.cfg.venues[n]?.chip !== false), ...(myLocationAllowed() ? [MY] : [])];
     // built once: rebuilding on every poll swallowed clicks; a click while a query runs
     // replaces it (newest wins)
     if (places.children.length !== names.length) {
