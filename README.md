@@ -1,4 +1,4 @@
-# sc26-chicago-stormscope_us-booth
+# nvidia-earthmover-stormscope-us
 
 [![Launch on Brev](https://brev-assets.s3.us-west-1.amazonaws.com/nv-lb-dark.svg)](https://brev.nvidia.com/launchable/deploy?launchableID=env-3M2pAl81MVfkO3sQbiqFQjKLiQ4)
 
