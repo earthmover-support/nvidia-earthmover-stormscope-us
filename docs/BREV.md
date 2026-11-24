@@ -39,7 +39,7 @@ Setup values:
 | Name | Required | Type | Default | Description |
 |---|---|---|---|---|
 | `ARRAYLAKE_API_TOKEN` | yes | Text | none | Arraylake token with write access to the repo. Pick **Use a secret** with an org secret when deploying. |
-| `ARRAYLAKE_REPO` | no | Text | `nvidia/sc26-chicago-stormscope_us-booth` | Arraylake `org/repo` to publish to. |
+| `ARRAYLAKE_REPO` | no | Text | `nvidia/nvidia-earthmover-stormscope-us` | Arraylake `org/repo` to publish to. |
 | `STORMSCOPE_PUBLISH_TARGET` | no | Choice: `arraylake`, `local` | `arraylake` | `local` writes to `/var/lib/stormscope-us/outputs` on the VM instead, for a test. |
 | `STORMSCOPE_GIT_REF` | no | Text | `main` | Branch, tag or commit of this repo to run. |
 

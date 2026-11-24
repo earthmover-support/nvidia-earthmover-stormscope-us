@@ -3,7 +3,7 @@
 Goal: Low-latency StromscopeUS pipeline, running in AWS us-east-1 to sit next to the NOAA GOES-19 bucket (`noaa-goes19`, us-east-1) and the Arraylake/Icechunk storage, so there is no cross-region transfer
 Template: https://github.com/earthmover-support/nvidia-gtc-berlin-2026-stormscope_eu-booth and ../nvidia-gtc-berlin-2026-stormscope_eu-booth
 
-Arraylake repo: https://app.earthmover.io/nvidia/sc26-chicago-stormscope_us-booth
+Arraylake repo: https://app.earthmover.io/nvidia/nvidia-earthmover-stormscope-us
 
 Key differences:
 - spatial domain: CONUS with GOES
@@ -15,7 +15,7 @@ Key differences:
 Booth demo for SC26 Chicago (McCormick Place, 2026-11-15/20): run StormScope-US
 (`StormScopeGOES`, `3km_10min_flash`, earth2studio 0.20.0) on GOES-19 ABI CONUS data,
 stream each forecast step into Icechunk on Arraylake
-(`nvidia/sc26-chicago-stormscope_us-booth`), and show the latest run on a booth screen and
+(`nvidia/nvidia-earthmover-stormscope-us`), and show the latest run on a booth screen and
 a phone viewer through the Arraylake tiles service. US only; nothing of the EU setup
 is kept besides its structure.
 

@@ -90,7 +90,7 @@ torch.compile warmup).
 | | |
 |---|---|
 | Cluster name | `stormscope-us-gpu`, workspace `earthmover-devs` |
-| Job | continuous: a 12-step forecast per 5-min GOES scan, published to `nvidia/sc26-chicago-stormscope_us-booth` |
+| Job | continuous: a 12-step forecast per 5-min GOES scan, published to `nvidia/nvidia-earthmover-stormscope-us` |
 | Keepalive | none: the VM runs while the continuous loop runs, so stop it yourself |
 | Stop | `uv run coiled cluster stop --workspace earthmover-devs stormscope-us-gpu` |
 | Logs | `uv run coiled logs --workspace earthmover-devs --cluster stormscope-us-gpu --label none` |
@@ -119,7 +119,7 @@ starting a VM (no cost), so the loop tries again:
      --docker-shm-size "1 GiB" --file scripts/ --detach \
      --env ARRAYLAKE_API_TOKEN="$ARRAYLAKE_API_TOKEN" \
      -- bash scripts/coiled_bootstrap.sh --n-steps 12 --publish-target arraylake \
-        --arraylake-repo nvidia/sc26-chicago-stormscope_us-booth \
+        --arraylake-repo nvidia/nvidia-earthmover-stormscope-us \
      > run.log 2>&1
    grep -q "VM Type: *[a-z]" run.log && break  # got a VM
    sleep 120
