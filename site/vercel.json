@@ -3,6 +3,13 @@
   "ignoreCommand": "if [ -n \"$VERCEL_GIT_PREVIOUS_SHA\" ] && git cat-file -e \"$VERCEL_GIT_PREVIOUS_SHA\"^{commit} 2>/dev/null && git diff --quiet \"$VERCEL_GIT_PREVIOUS_SHA\" HEAD -- .; then exit 0; else exit 1; fi",
   "installCommand": "npm ci",
   "buildCommand": "npm run build",
+  "redirects": [
+    {
+      "source": "/tiles/sc26-chicago-stormscope_us-booth/:path*",
+      "destination": "/tiles/nvidia-earthmover-stormscope-us/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/tiles/:path*",
