@@ -17,9 +17,10 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 CONFIG = json.loads((HERE / "config.json").read_text())
-# the venue: the "you are here" marker and the default SQL place, unless the page knows better
-if CONFIG["location"] not in CONFIG["sql"]["places"]:
-    raise ValueError(f"config.json location {CONFIG['location']!r} is not one of sql.places")
+# the venue: the "you are here" marker, the screen's time zone and the default SQL place,
+# unless the page knows better (?location=, browser position)
+if CONFIG["location"] not in CONFIG["venues"]:
+    raise ValueError(f"config.json location {CONFIG['location']!r} is not one of venues")
 
 # "stormscope-us 2026-11-16T23:50 lead 0-120 min": one commit per init
 MSG_RE = re.compile(r"stormscope-us\s+(?P<init>\d{4}-\d{2}-\d{2}T\d{2}:\d{2})\b")
@@ -42,14 +43,12 @@ def query_for_coords(lat: float, lon: float) -> str:
 
 
 def place_queries() -> dict[str, str]:
-    """config.json query filled in per sql.places entry; {init} stays for fill_init()."""
-    return {
-        name: query_for_coords(lat, lon) for name, (lat, lon) in CONFIG["sql"]["places"].items()
-    }
+    """config.json query filled in per venue; {init} stays for fill_init()."""
+    return {name: query_for_coords(v["lat"], v["lon"]) for name, v in CONFIG["venues"].items()}
 
 
 def default_sql() -> str:
-    """The query for the location's place in sql.places."""
+    """The query for the location's venue."""
     return place_queries()[CONFIG["location"]]
 
 
@@ -221,8 +220,8 @@ def public_config(sql_editable: bool) -> dict:
         "hold_first_ms",
         "hold_ms",
         "attract_reset_s",
-        "timezone",
         "location",
+        "venues",
         "camera",
         "viewer_url",
         "qr_tile",
@@ -231,7 +230,6 @@ def public_config(sql_editable: bool) -> dict:
     return {k: CONFIG[k] for k in keys} | {
         "leads": all_leads(),
         "sql_places": place_queries(),
-        "places": CONFIG["sql"]["places"],
         "sql_box": CONFIG["sql"]["box_deg"],
         "sql_editable": sql_editable,
     }

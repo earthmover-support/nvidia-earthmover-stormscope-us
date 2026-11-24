@@ -465,10 +465,10 @@ def newest_init() -> str | None:
 
 
 def poll_sql(stop: threading.Event) -> None:
-    """Run the default (first place) query once per new init, and otherwise only on Run (panel 07).
+    """Run the default (location venue) query once per new init, and otherwise only on Run (panel 07).
 
     Each new init resets the editor to the default query, so the booth screen returns to
-    the first place. Results are cached per (init, query text): pressing Run again before the next
+    the location venue. Results are cached per (init, query text): pressing Run again before the next
     run lands shows the stored result, marked `cached`, without querying the service.
     """
     wake = SHARED.sql_wake

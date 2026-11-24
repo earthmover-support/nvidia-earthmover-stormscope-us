@@ -6,7 +6,7 @@
  *   /api/sql     -> latest Zax-SQL result (polled every 10 s, 1 s while a query runs)
  *                   POST {query} runs what is in the panel 06 editor; chips and
  *                   ⌘/Ctrl+Enter send it (there is no Run button)
- *                   (the server also runs the first place's query once for each new init)
+ *                   (the server also runs the location venue's query once for each new init)
  *                   Hosted page (`sql_editable: false`): the editor is read-only and Run
  *                   sends GET ?place=&init=, answered once the query is done (CDN-cached)
  * Tiles are fetched by MapLibre straight from the public Earthmover Compute tiles service,
@@ -56,7 +56,7 @@
   // ------------------------------------------------------------------ helpers
   const pad = (n) => String(n).padStart(2, "0");
   const initDate = (init) => new Date(init + ":00Z"); // inits are stored in UTC
-  // All screen timestamps use config.json `timezone`, with UTC as the fallback.
+  // All screen timestamps use the venue's `timezone` (config.json `venues`), with UTC as the fallback.
   // Set in boot() once the config has loaded.
   let TZ = "UTC", HM, YMD;
   function setTimezone(zone) {
@@ -284,12 +284,12 @@
     hereMarker.setLngLat([S.here.lon, S.here.lat]);
   }
 
-  // The venue: ?location=<sql.places name> for this screen, else config.json location.
+  // The venue: ?location=<venues name> for this screen, else config.json location.
   function venue() {
     const asked = new URLSearchParams(location.search).get("location");
-    const name = asked && Object.hasOwn(S.cfg.places, asked) ? asked : S.cfg.location;
-    const [lat, lon] = S.cfg.places[name];
-    return { name, lat, lon };
+    const name = asked && Object.hasOwn(S.cfg.venues, asked) ? asked : S.cfg.location;
+    const { lat, lon, timezone } = S.cfg.venues[name];
+    return { name, lat, lon, timezone };
   }
 
   // Moves "here" from the venue to the browser's location, only if the browser already
@@ -881,8 +881,10 @@
         .replace("{z}", q.z).replace("{y}", q.y).replace("{x}", q.x);
       type = setQR("qrTiles", new URL(url, location.href).href); // hosted tile_base is relative
     }
-    setQR("qrViewer", c.viewer_url, type);
-    setQR("qrViewerCorner", c.viewer_url, type, 16); // always-on copy in the strip; white border (4-module quiet zone, SVG units) lives in the SVG so it scales evenly
+    // always pass the venue: the phone viewer can't read config.json and defaults to SC26 Chicago
+    const viewer = `${c.viewer_url}?location=${encodeURIComponent(venue().name)}`;
+    setQR("qrViewer", viewer, type);
+    setQR("qrViewerCorner", viewer, type, 16); // always-on copy in the strip; white border (4-module quiet zone, SVG units) lives in the SVG so it scales evenly
   }
 
   // ------------------------------------------------------------------ SQL
@@ -892,7 +894,7 @@
     showPanel(S.panel);
   };
 
-  // server-filled query per city chip, {init} left in; the one for "here" is the default
+  // server-filled query per venue chip, {init} left in; the one for "here" is the default
   const sqlFor = (name) => S.cfg.sql_places[name];
   const MY = "My location";
   // Coordinate queries exist only on the booth (sql_editable): the hosted server runs the
@@ -1022,7 +1024,7 @@
       },
       (err) => {
         const hint = " – pick one of the event venues.";
-        if (err && err.code === 1) myLocationError(`Location permission denied – allow location access or pick a city.${hint}`);
+        if (err && err.code === 1) myLocationError("Location permission denied – allow location access or pick one of the event venues.");
         else if (err && err.code === 3) myLocationError(`Location request timed out${hint}`);
         else myLocationError(`Location unavailable${err && err.message ? `: ${err.message}` : hint}`);
       },
@@ -1286,10 +1288,12 @@
     fitStage();
     window.addEventListener("resize", fitStage);
     S.cfg = await (await fetch("/api/config")).json();
-    setTimezone(S.cfg.timezone);
+    const v = venue();
+    setTimezone(v.timezone); // stays the venue's even when locate() moves "here"
+    $("#demoEvent").textContent = v.name;
     if (BLOG_URL) Object.assign($("#blogLink"), { href: BLOG_URL, hidden: false });
     if (S.cfg.playback_speed in SPEEDS) S.speed = S.cfg.playback_speed;
-    S.here = venue(); // the browser's location replaces it in locate(), if allowed
+    S.here = v; // the browser's location replaces it in locate(), if allowed
     S.variable = defaultVariable();
     initSqlEditor();
     renderVarToggle();

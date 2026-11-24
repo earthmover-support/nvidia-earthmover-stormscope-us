@@ -68,8 +68,9 @@ after `attract_reset_s` seconds without input. `attract_reset_s` is in `config.j
 
 ## Here
 
-"Here" sets three things: the "you are here" marker, the day/night default variable and
-the default place of the live SQL query. The page starts and resets on `true_color` while
+"Here" sets the "you are here" marker, the day/night default variable and the default
+place of the live SQL query. The venue (options 2 and 3 below) also sets the time zone of
+the screen, the event name in the demo note and the `?location=` the viewer QR code adds. The page starts and resets on `true_color` while
 the sun is up here, and on `water_vapor` while it is dark.
 
 The page takes "here" from the first of these that applies:
@@ -78,13 +79,14 @@ The page takes "here" from the first of these that applies:
    is inside `data_bounds`. The page never asks for permission. The marker then reads only
    "you are here". On the hosted page the SQL default stays on the venue: its server
    runs only the venue queries, never a query for a coordinate.
-2. `?location=<name>` in the page URL, for example `?location=Denver`. Use it to run one
+2. `?location=<name>` in the page URL, for example `?location=GTC%20DC`. Use it to run one
    screen at another venue without a config edit. The camera shifts so that the venue
-   stays on screen. The root README [lists the link for each venue](../README.md#links).
-3. `location` in `config.json`, which is `"Chicago"`.
+   stays on screen. The root README [lists the link for each event](../README.md#events).
+3. `location` in `config.json`, which is `"SC26 Chicago"`.
 
-Options 2 and 3 name an entry in `sql.places`, the venue chips on slide 8. Add a new venue
-there first.
+Options 2 and 3 name an entry in `venues` (`lat`, `lon`, `timezone`, `dates`), the venue
+chips on slide 8. Add a new venue there first, and to `VENUES` in
+[`site/index.html`](../site/index.html).
 
 ## Before the event
 
@@ -109,10 +111,10 @@ there first.
    `config.json`. `ARRAYLAKE_SQL_HOST=...` in `.env` overrides it. An empty host shows SQL
    as disabled. The service scales to zero, so run one query before visitors arrive.
 
-   Panel 08 is a live editor. Click a venue chip (`sql.places`), or type any single
-   `SELECT` or `WITH` statement and press ⌘/Ctrl+Enter. Esc leaves the box. The
-   chips are cities: Chicago, Denver, New York, Dallas, Los Angeles. A chip fills the
-   editor and runs the query at once.
+   Panel 08 is a live editor. Click a venue chip (`venues`), or type any single
+   `SELECT` or `WITH` statement and press ⌘/Ctrl+Enter. Esc leaves the box. The venue
+   chips are the events in date order: SC26 Chicago, GTC DC, AGU26 SF,
+   AMS 2027 Denver, GTC San Jose. A chip fills the editor and runs the query at once.
    Reset only fills the editor.
 
    The server runs the query with the token. The browser never sees the token. For each
@@ -135,8 +137,8 @@ there first.
    is the init cadence, one per 5-min CONUS scan.
 6. **QR code.** `viewer_url` in `config.json` sets the first QR code on the last panel,
    slide 8.
-7. **Time zone.** The page shows every time in `timezone` from `config.json`,
-   `America/Chicago`. The booth machine's and the hosted viewer's time zone settings have
+7. **Time zone.** The page shows every time in the venue's `timezone` from `venues` in
+   `config.json`, `America/Chicago` for SC26. The booth machine's and the hosted viewer's time zone settings have
    no effect. Only the SQL `WHERE time = TIMESTAMP '{init}'` stays in UTC.
 8. **Offline backup.** With tiles and SQL up, save a fallback in case the venue has no
    internet:
@@ -162,7 +164,7 @@ ways:
 - **SQL is locked.** `/api/config` answers `sql_editable: false`. The editor is
   read-only, Reset is hidden, and the venue chips pick the query. Run sends
   `GET /api/sql?place=<venue>&init=<newest init>`. The function runs only the
-  `config.json` query for a `sql.places` entry, and only for an init on the 5-minute grid
+  `config.json` query for a `venues` entry, and only for an init on the 5-minute grid
   from the last 7 days. It rejects all other requests, including query text and POSTs. The
   CDN keeps each answer for a day.
 - **No pollers.** `/api/state` reads the commits and the `time` coordinate on each
