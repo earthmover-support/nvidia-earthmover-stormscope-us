@@ -6,22 +6,14 @@ The booth demo for SC26 Chicago, McCormick Place, 15 to 20 November 2026. It run
 StormScope-US nowcasts on GOES-19 ABI data over the contiguous US and streams them into
 Arraylake. The deployed pipeline is temporary.
 
-## Locations
-
-`venues` in [`presentation/config.json`](presentation/config.json) lists the locations
-(`lat`, `lon`, `timezone`); `location` picks the default. Add `?location=<name>` to the
-booth page to use another one. It sets the "you are here" marker, the day/night default,
-the time zone of the screen, the default SQL place and the demo note. The QR code on the
-screen passes it on to the mobile viewer. To add a location, add it to `venues` and to
-`VENUES` in [`site/index.html`](site/index.html), with the same name.
-
 ## Links
 
 - Earth2Studio example: https://nvidia.github.io/earth2studio/main/examples/04_nowcasting/03_stormscope_goes_example/
 - Arraylake repo: https://app.earthmover.io/nvidia/nvidia-earthmover-stormscope-us
 - Hosted presentation: https://nvidia-sc26-chicago.earthmover.io/. To centre it on another
-  location, add `?location=` with a name from [Locations](#locations). A
-  browser that already allows location access uses its own position instead. See
+  location, add `?location=` with a name from `venues` in
+  [`presentation/config.json`](presentation/config.json). A browser that already allows
+  location access uses its own position instead. See
   ["Here"](presentation/README.md#here) for the rules.
 - Mobile viewer: https://nvidia-sc26-chicago-viewer.earthmover.io/, also with `?location=`.
 
