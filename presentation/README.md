@@ -84,9 +84,8 @@ The page takes "here" from the first of these that applies:
    stays on screen. The root README [lists the link for each event](../README.md#events).
 3. `location` in `config.json`, which is `"SC26 Chicago"`.
 
-Options 2 and 3 name an entry in `venues` (`city`, `lat`, `lon`, `timezone`, `dates`), the venue
-chips on slide 8. The entry's name is the key in URLs; the marker and the chips show its
-`city`. Add a new venue there first, and to `VENUES` in
+Options 2 and 3 name an entry in `venues` (`lat`, `lon`, `timezone`, `dates`), the venue
+chips on slide 8. Add a new venue there first, and to `VENUES` in
 [`site/index.html`](../site/index.html).
 
 ## Before the event
@@ -114,8 +113,8 @@ chips on slide 8. The entry's name is the key in URLs; the marker and the chips 
 
    Panel 08 is a live editor. Click a venue chip (`venues`), or type any single
    `SELECT` or `WITH` statement and press ⌘/Ctrl+Enter. Esc leaves the box. The venue
-   chips follow the order of `venues`, labelled by city: Washington, DC, Chicago,
-   Denver, San Francisco. A chip fills the editor and runs the query at once.
+   chips are the events in date order: SC26 Chicago, GTC DC, AGU26 SF,
+   AMS 2027 Denver, GTC San Jose. A chip fills the editor and runs the query at once.
    Reset only fills the editor.
 
    The server runs the query with the token. The browser never sees the token. For each
