@@ -20,7 +20,7 @@
 set -euo pipefail
 step() { echo "[brev-setup] $(date -u +%H:%M:%S) $*"; }
 
-GIT_URL=https://github.com/earthmover-support/sc26-chicago-stormscope_us-booth.git
+GIT_URL=https://github.com/earthmover-support/nvidia-earthmover-stormscope-us.git
 GIT_REF=${STORMSCOPE_GIT_REF:-main}
 APP_DIR=/opt/stormscope-us
 ENV_FILE=/etc/stormscope-us/env
