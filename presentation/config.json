@@ -25,13 +25,14 @@
   "hold_first_ms": 2000,
   "hold_ms": 2000,
   "attract_reset_s": 180,
-  "location": "SC26 Chicago",
+  "location": "Washington DC",
   "venues": {
-    "SC26 Chicago":    { "lat": 41.8517, "lon": -87.6167,  "timezone": "America/Chicago",     "dates": "2026-11-15/20" },
-    "GTC DC":          { "lat": 38.8936, "lon": -77.0311,  "timezone": "America/New_York",    "dates": "2026-11-30/12-03" },
-    "AGU26 SF":        { "lat": 37.7842, "lon": -122.4016, "timezone": "America/Los_Angeles", "dates": "2026-12-07/11" },
-    "AMS 2027 Denver": { "lat": 39.7427, "lon": -104.9963, "timezone": "America/Denver",      "dates": "2027-01-10/14" },
-    "GTC San Jose":    { "lat": 37.3297, "lon": -121.8889, "timezone": "America/Los_Angeles", "dates": "2027-03-15/18" }
+    "Washington DC": { "lat": 38.9072, "lon": -77.0369,  "timezone": "America/New_York" },
+    "Chicago":       { "lat": 41.8781, "lon": -87.6298,  "timezone": "America/Chicago" },
+    "Denver":        { "lat": 39.7392, "lon": -104.9903, "timezone": "America/Denver" },
+    "New York":      { "lat": 40.7128, "lon": -74.0060,  "timezone": "America/New_York" },
+    "Dallas":        { "lat": 32.7767, "lon": -96.7970,  "timezone": "America/Chicago" },
+    "Los Angeles":   { "lat": 34.0522, "lon": -118.2437, "timezone": "America/Los_Angeles" }
   },
   "camera": { "lon": -96.0, "lat": 38.5, "zoom": 3.3, "pitch": 32, "sway_deg": 10, "sway_period_s": 120,
               "cover": [-125, 24, -67, 50], "min_zoom": 2, "max_zoom": 8.5, "idle_reset_s": 30 },

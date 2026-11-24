@@ -881,7 +881,7 @@
         .replace("{z}", q.z).replace("{y}", q.y).replace("{x}", q.x);
       type = setQR("qrTiles", new URL(url, location.href).href); // hosted tile_base is relative
     }
-    // always pass the venue: the phone viewer can't read config.json and defaults to SC26 Chicago
+    // always pass the venue: the phone viewer can't read config.json and defaults to Washington DC
     const viewer = `${c.viewer_url}?location=${encodeURIComponent(venue().name)}`;
     setQR("qrViewer", viewer, type);
     setQR("qrViewerCorner", viewer, type, 16); // always-on copy in the strip; white border (4-module quiet zone, SVG units) lives in the SVG so it scales evenly
@@ -999,7 +999,7 @@
   function useMyLocation() {
     holdPanel();
     if (!("geolocation" in navigator)) {
-      myLocationError("Geolocation is not available in this browser – pick one of the event venues.");
+      myLocationError("Geolocation is not available in this browser – pick one of the locations.");
       return;
     }
     S.locating = true;
@@ -1011,7 +1011,7 @@
         S.locating = false;
         if (!inBounds(lat, lon)) {
           myLocationError(
-            `My location (${fmtCoords(lat, lon)}) is outside the StormScope-US domain (${boundsText()}) – pick one of the event venues.`
+            `My location (${fmtCoords(lat, lon)}) is outside the StormScope-US domain (${boundsText()}) – pick one of the locations.`
           );
           return;
         }
@@ -1023,8 +1023,8 @@
         runSql(query); // booth only: POSTs the query to server.py
       },
       (err) => {
-        const hint = " – pick one of the event venues.";
-        if (err && err.code === 1) myLocationError("Location permission denied – allow location access or pick one of the event venues.");
+        const hint = " – pick one of the locations.";
+        if (err && err.code === 1) myLocationError("Location permission denied – allow location access or pick one of the locations.");
         else if (err && err.code === 3) myLocationError(`Location request timed out${hint}`);
         else myLocationError(`Location unavailable${err && err.message ? `: ${err.message}` : hint}`);
       },
