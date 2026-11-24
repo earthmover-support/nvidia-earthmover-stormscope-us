@@ -147,6 +147,10 @@ requests `/tiles/...` on any `https:` origin. The hosted presentation gets
 The function does these things:
 
 - It forwards only the requests that its page makes. Any other path returns `404`.
+  Before that, `vercel.json` sends `/tiles/sc26-chicago-stormscope_us-booth/*` (the
+  Arraylake repo name before #33) to `/tiles/nvidia-earthmover-stormscope-us/*` with a
+  permanent `308` redirect, so the query string is kept. Tile QR codes captured before the
+  rename keep working.
 - It keeps successful responses in two caches. The first is Vercel's CDN, one cache per edge
   region and hostname. The second is the Runtime Cache, which all regions and hostnames
   share because the function always runs in one region. Tiles stay for a day. Errors such

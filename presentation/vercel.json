@@ -15,6 +15,13 @@
       ]
     }
   },
+  "redirects": [
+    {
+      "source": "/tiles/sc26-chicago-stormscope_us-booth/:path*",
+      "destination": "/tiles/nvidia-earthmover-stormscope-us/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/tiles/:path*",
