@@ -193,6 +193,11 @@
     map.on("style.load", () => {
       map.setProjection({ type: "globe" });
       labelsLayer = map.getStyle().layers.find((l) => l.type === "symbol")?.id;
+      // More city labels: the basemap holds its mid-size cities back until zoom 5 and 6, past
+      // the booth camera. Its tiles carry them two zooms earlier, so start those layers there.
+      for (const [id, minzoom] of [["place_city_dot_r4", 3], ["place_city_dot_r7", 5]]) {
+        if (map.getLayer(id)) map.setLayerZoomRange(id, minzoom, map.getLayer(id).maxzoom);
+      }
     });
     map.on("load", () => {
       mapReady = true;
