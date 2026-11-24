@@ -2,25 +2,38 @@
 
 [![Launch on Brev](https://brev-assets.s3.us-west-1.amazonaws.com/nv-lb-dark.svg)](https://brev.nvidia.com/launchable/deploy?launchableID=env-3M2pAl81MVfkO3sQbiqFQjKLiQ4)
 
-The booth demo for SC26 Chicago, McCormick Place, 15 to 20 November 2026. It runs
-StormScope-US nowcasts on GOES-19 ABI data over the contiguous US and streams them into
-Arraylake. We stop the deployed pipeline after the event.
+The booth demo for SC26 Chicago, McCormick Place, 15 to 20 November 2026, also shown at
+the events in [Events](#events). It runs StormScope-US nowcasts on GOES-19 ABI data over
+the contiguous US and streams them into Arraylake. We stop the deployed pipeline after the
+last event.
+
+## Events
+
+Each event is an entry in `venues` in [`presentation/config.json`](presentation/config.json).
+Add `?location=<name>` to the booth page for that event. The entry sets the "you are here"
+marker, the day/night default, the time zone of the screen, the default SQL place and the
+demo note. The QR code on the screen passes the venue on to the mobile viewer.
+
+| Event | Dates | Venue | Time zone | Booth page | Mobile viewer |
+| --- | --- | --- | --- | --- | --- |
+| SC26 Chicago (default) | 2026-11-15 to 11-20 | McCormick Place | America/Chicago | [link](https://nvidia-sc26-chicago.earthmover.io/?location=SC26%20Chicago) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/) |
+| GTC DC | 2026-11-30 to 12-03 | Walter E. Washington Convention Center | America/New_York | [link](https://nvidia-sc26-chicago.earthmover.io/?location=GTC%20DC) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=GTC%20DC) |
+| AGU26 SF | 2026-12-07 to 12-11 | Moscone Center, San Francisco | America/Los_Angeles | [link](https://nvidia-sc26-chicago.earthmover.io/?location=AGU26%20SF) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=AGU26%20SF) |
+| AMS 2027 Denver | 2027-01-10 to 01-14 | Colorado Convention Center | America/Denver | [link](https://nvidia-sc26-chicago.earthmover.io/?location=AMS%202027%20Denver) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=AMS%202027%20Denver) |
+| GTC San Jose | 2027-03-15 to 03-18 | San Jose McEnery Convention Center | America/Los_Angeles | [link](https://nvidia-sc26-chicago.earthmover.io/?location=GTC%20San%20Jose) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=GTC%20San%20Jose) |
+
+To add an event, add it to `venues` in `presentation/config.json` and to `VENUES` in
+[`site/index.html`](site/index.html), with the same name.
 
 ## Links
 
 - Earth2Studio example: https://nvidia.github.io/earth2studio/main/examples/04_nowcasting/03_stormscope_goes_example/
 - Arraylake repo: https://app.earthmover.io/nvidia/sc26-chicago-stormscope_us-booth
 - Hosted presentation: https://nvidia-sc26-chicago.earthmover.io/. To centre it on another
-  venue, add `?location=` with a name from `sql.places` in
-  [`presentation/config.json`](presentation/config.json). A browser that already allows
-  location access uses its own position instead. See
+  venue, add `?location=` with an event name; [Events](#events) has the link per event. A
+  browser that already allows location access uses its own position instead. See
   ["Here"](presentation/README.md#here) for the rules.
-  - Chicago (default): https://nvidia-sc26-chicago.earthmover.io/?location=Chicago
-  - Denver: https://nvidia-sc26-chicago.earthmover.io/?location=Denver
-  - New York: https://nvidia-sc26-chicago.earthmover.io/?location=New%20York
-  - Dallas: https://nvidia-sc26-chicago.earthmover.io/?location=Dallas
-  - Los Angeles: https://nvidia-sc26-chicago.earthmover.io/?location=Los%20Angeles
-- Mobile viewer: https://nvidia-sc26-chicago-viewer.earthmover.io/
+- Mobile viewer: https://nvidia-sc26-chicago-viewer.earthmover.io/, also with `?location=`.
 
 [`scripts/stormscope_us_pipeline.py`](scripts/stormscope_us_pipeline.py) runs
 `StormScopeGOES` (`3km_10min_flash`, earth2studio 0.20.0) end to end:

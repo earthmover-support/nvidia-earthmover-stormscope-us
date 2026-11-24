@@ -1,7 +1,7 @@
 """GET /api/sql on the hosted page: ?place=<name>&init=<...>.
 
-Runs only the config.json query for one of `sql.places`, never free text or coordinates
-from the browser: the set of possible URLs stays small (places x inits of the last week),
+Runs only the config.json query for one of `venues`, never free text or coordinates
+from the browser: the set of possible URLs stays small (venues x inits of the last week),
 so the CDN keeps each answer for a day and a stranger cannot make the function run a new
 query per request. The CDN caches by exact URL, so a request that is not in the one
 canonical form (`?place=..&init=..`, in that order, nothing else) is redirected to it
