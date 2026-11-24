@@ -116,11 +116,12 @@ const INIT_STEP_MS = 5 * 60000;
 // (the booth QR code adds it); it decides day or night for the starting composite, the demo
 // note, and the time zone when the browser reports none.
 const VENUES = {
-  "SC26 Chicago": [41.8517, -87.6167, "America/Chicago"],
-  "Washington DC": [38.8936, -77.0311, "America/New_York"],
-  "San Francisco": [37.7842, -122.4016, "America/Los_Angeles"],
-  "Denver": [39.7427, -104.9963, "America/Denver"],
-  "San Jose": [37.3297, -121.8889, "America/Los_Angeles"],
+  "Washington DC": [38.9072, -77.0369, "America/New_York"],
+  "Chicago": [41.8781, -87.6298, "America/Chicago"],
+  "Denver": [39.7392, -104.9903, "America/Denver"],
+  "New York": [40.7128, -74.0060, "America/New_York"],
+  "Dallas": [32.7767, -96.7970, "America/Chicago"],
+  "Los Angeles": [34.0522, -118.2437, "America/Los_Angeles"],
 };
 const asked = new URLSearchParams(location.search).get("location");
 const EVENT = Object.hasOwn(VENUES, asked ?? "") ? asked : "Washington DC";
