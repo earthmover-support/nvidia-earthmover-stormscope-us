@@ -999,7 +999,7 @@
   function useMyLocation() {
     holdPanel();
     if (!("geolocation" in navigator)) {
-      myLocationError("Geolocation is not available in this browser – pick one of the event venues.");
+      myLocationError("Geolocation is not available in this browser – pick one of the locations.");
       return;
     }
     S.locating = true;
@@ -1011,7 +1011,7 @@
         S.locating = false;
         if (!inBounds(lat, lon)) {
           myLocationError(
-            `My location (${fmtCoords(lat, lon)}) is outside the StormScope-US domain (${boundsText()}) – pick one of the event venues.`
+            `My location (${fmtCoords(lat, lon)}) is outside the StormScope-US domain (${boundsText()}) – pick one of the locations.`
           );
           return;
         }
@@ -1023,8 +1023,8 @@
         runSql(query); // booth only: POSTs the query to server.py
       },
       (err) => {
-        const hint = " – pick one of the event venues.";
-        if (err && err.code === 1) myLocationError("Location permission denied – allow location access or pick one of the event venues.");
+        const hint = " – pick one of the locations.";
+        if (err && err.code === 1) myLocationError("Location permission denied – allow location access or pick one of the locations.");
         else if (err && err.code === 3) myLocationError(`Location request timed out${hint}`);
         else myLocationError(`Location unavailable${err && err.message ? `: ${err.message}` : hint}`);
       },

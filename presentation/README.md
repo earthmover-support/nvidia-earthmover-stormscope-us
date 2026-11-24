@@ -70,7 +70,7 @@ after `attract_reset_s` seconds without input. `attract_reset_s` is in `config.j
 
 "Here" sets the "you are here" marker, the day/night default variable and the default
 place of the live SQL query. The venue (options 2 and 3 below) also sets the time zone of
-the screen, the event name in the demo note and the `?location=` the viewer QR code adds. The page starts and resets on `true_color` while
+the screen, the name in the demo note and the `?location=` the viewer QR code adds. The page starts and resets on `true_color` while
 the sun is up here, and on `water_vapor` while it is dark.
 
 The page takes "here" from the first of these that applies:
@@ -78,14 +78,14 @@ The page takes "here" from the first of these that applies:
 1. The browser's location, if the browser already has location permission and the location
    is inside `data_bounds`. The page never asks for permission. The marker then reads only
    "you are here". On the hosted page the SQL default stays on the venue: its server
-   runs only the venue queries, never a query for a coordinate.
-2. `?location=<name>` in the page URL, for example `?location=GTC%20DC`. Use it to run one
-   screen at another venue without a config edit. The camera shifts so that the venue
-   stays on screen. The root README [lists the link for each event](../README.md#events).
+   runs only the location queries, never a query for a coordinate.
+2. `?location=<name>` in the page URL, for example `?location=Denver`. Use it to run one
+   screen at another location without a config edit. The camera shifts so that the
+   location stays on screen. See [Locations](../README.md#locations).
 3. `location` in `config.json`, which is `"SC26 Chicago"`.
 
-Options 2 and 3 name an entry in `venues` (`lat`, `lon`, `timezone`, `dates`), the venue
-chips on slide 8. Add a new venue there first, and to `VENUES` in
+Options 2 and 3 name an entry in `venues` (`lat`, `lon`, `timezone`), the location
+chips on slide 8. Add a new location there first, and to `VENUES` in
 [`site/index.html`](../site/index.html).
 
 ## Before the event
@@ -111,18 +111,17 @@ chips on slide 8. Add a new venue there first, and to `VENUES` in
    `config.json`. `ARRAYLAKE_SQL_HOST=...` in `.env` overrides it. An empty host shows SQL
    as disabled. The service scales to zero, so run one query before visitors arrive.
 
-   Panel 08 is a live editor. Click a venue chip (`venues`), or type any single
-   `SELECT` or `WITH` statement and press ⌘/Ctrl+Enter. Esc leaves the box. The venue
-   chips are the events in date order: SC26 Chicago, GTC DC, AGU26 SF,
-   AMS 2027 Denver, GTC San Jose. A chip fills the editor and runs the query at once.
+   Panel 08 is a live editor. Click a location chip (`venues`), or type any single
+   `SELECT` or `WITH` statement and press ⌘/Ctrl+Enter. Esc leaves the box. The location
+   chips follow the order of `venues` in `config.json`. A chip fills the editor and runs the query at once.
    Reset only fills the editor.
 
    The server runs the query with the token. The browser never sees the token. For each
    new init, the server also runs the query once by itself. It resets the editor to the
-   first venue and keeps that result until the next init.
+   first location and keeps that result until the next init.
 
    The server replaces `{init}` with the newest complete init, and fills `{lat}`, `{lon}`
-   and `{box}` in `sql.query` per venue. `lat` and `lon` are 2-D pixel coordinates, so
+   and `{box}` in `sql.query` per location. `lat` and `lon` are 2-D pixel coordinates, so
    filter on a `BETWEEN` box, never on equality.
 4. **Variables.** `true_color` and `water_vapor` use the
    [render parameters](../README.md#render-parameters) in the root README. To add more,
@@ -162,7 +161,7 @@ The same page, for internal sharing at an unlisted URL. It differs from the boot
 ways:
 
 - **SQL is locked.** `/api/config` answers `sql_editable: false`. The editor is
-  read-only, Reset is hidden, and the venue chips pick the query. Run sends
+  read-only, Reset is hidden, and the location chips pick the query. Run sends
   `GET /api/sql?place=<venue>&init=<newest init>`. The function runs only the
   `config.json` query for a `venues` entry, and only for an init on the 5-minute grid
   from the last 7 days. It rejects all other requests, including query text and POSTs. The
@@ -208,7 +207,7 @@ mkdir "$B/.vercel" && echo '{"projectId":"local","orgId":"local","settings":{"fr
    [end-to-end performance doc](../docs/END2END_NEARREALTIME_PERFORMANCE.md).
 6. Arraylake + Icechunk: overlapped uploads, one atomic commit per run.
 7. The data lake: recent commits, time travel.
-8. Your turn: viewer and raw-tile QR codes, live SQL over the event venues.
+8. Your turn: viewer and raw-tile QR codes, live SQL over the locations.
 
 The strip's countdown and phase activity are labelled estimates. The API reports
 publications, not GPU progress. The diagrams are schematics, not live measurements. The

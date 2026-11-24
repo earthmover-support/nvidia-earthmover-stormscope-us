@@ -112,15 +112,15 @@ const LEADS_IN_FLIGHT = 3; // frames loading at once; one at a time waits on eac
 const POLL_MS = 60000; // how often to look for a new init
 const INITS = 288; // the selector offers the past 24 h, one init every 5 min (each GOES-19 CONUS scan)
 const INIT_STEP_MS = 5 * 60000;
-// Event venues, same names as `venues` in presentation/config.json. ?location=<name> picks one
+// Locations, same names as `venues` in presentation/config.json. ?location=<name> picks one
 // (the booth QR code adds it); it decides day or night for the starting composite, the demo
 // note, and the time zone when the browser reports none.
 const VENUES = {
   "SC26 Chicago": [41.8517, -87.6167, "America/Chicago"],
-  "GTC DC": [38.8936, -77.0311, "America/New_York"],
-  "AGU26 SF": [37.7842, -122.4016, "America/Los_Angeles"],
-  "AMS 2027 Denver": [39.7427, -104.9963, "America/Denver"],
-  "GTC San Jose": [37.3297, -121.8889, "America/Los_Angeles"],
+  "Washington DC": [38.8936, -77.0311, "America/New_York"],
+  "San Francisco": [37.7842, -122.4016, "America/Los_Angeles"],
+  "Denver": [39.7427, -104.9963, "America/Denver"],
+  "San Jose": [37.3297, -121.8889, "America/Los_Angeles"],
 };
 const asked = new URLSearchParams(location.search).get("location");
 const EVENT = Object.hasOwn(VENUES, asked ?? "") ? asked : "SC26 Chicago";

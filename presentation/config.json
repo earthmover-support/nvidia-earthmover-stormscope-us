@@ -27,11 +27,11 @@
   "attract_reset_s": 180,
   "location": "SC26 Chicago",
   "venues": {
-    "SC26 Chicago":    { "lat": 41.8517, "lon": -87.6167,  "timezone": "America/Chicago",     "dates": "2026-11-15/20" },
-    "GTC DC":          { "lat": 38.8936, "lon": -77.0311,  "timezone": "America/New_York",    "dates": "2026-11-30/12-03" },
-    "AGU26 SF":        { "lat": 37.7842, "lon": -122.4016, "timezone": "America/Los_Angeles", "dates": "2026-12-07/11" },
-    "AMS 2027 Denver": { "lat": 39.7427, "lon": -104.9963, "timezone": "America/Denver",      "dates": "2027-01-10/14" },
-    "GTC San Jose":    { "lat": 37.3297, "lon": -121.8889, "timezone": "America/Los_Angeles", "dates": "2027-03-15/18" }
+    "SC26 Chicago":  { "lat": 41.8517, "lon": -87.6167,  "timezone": "America/Chicago" },
+    "Washington DC": { "lat": 38.8936, "lon": -77.0311,  "timezone": "America/New_York" },
+    "San Francisco": { "lat": 37.7842, "lon": -122.4016, "timezone": "America/Los_Angeles" },
+    "Denver":        { "lat": 39.7427, "lon": -104.9963, "timezone": "America/Denver" },
+    "San Jose":      { "lat": 37.3297, "lon": -121.8889, "timezone": "America/Los_Angeles" }
   },
   "camera": { "lon": -96.0, "lat": 38.5, "zoom": 3.3, "pitch": 32, "sway_deg": 10, "sway_period_s": 120,
               "cover": [-125, 24, -67, 50], "min_zoom": 2, "max_zoom": 8.5, "idle_reset_s": 30 },

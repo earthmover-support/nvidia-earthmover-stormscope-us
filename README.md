@@ -2,35 +2,25 @@
 
 [![Launch on Brev](https://brev-assets.s3.us-west-1.amazonaws.com/nv-lb-dark.svg)](https://brev.nvidia.com/launchable/deploy?launchableID=env-3M2pAl81MVfkO3sQbiqFQjKLiQ4)
 
-The booth demo for SC26 Chicago, McCormick Place, 15 to 20 November 2026, also shown at
-the events in [Events](#events). It runs StormScope-US nowcasts on GOES-19 ABI data over
-the contiguous US and streams them into Arraylake. We stop the deployed pipeline after the
-last event.
+The booth demo for SC26 Chicago, McCormick Place, 15 to 20 November 2026. It runs
+StormScope-US nowcasts on GOES-19 ABI data over the contiguous US and streams them into
+Arraylake. The deployed pipeline is temporary.
 
-## Events
+## Locations
 
-Each event is an entry in `venues` in [`presentation/config.json`](presentation/config.json).
-Add `?location=<name>` to the booth page for that event. The entry sets the "you are here"
-marker, the day/night default, the time zone of the screen, the default SQL place and the
-demo note. The QR code on the screen passes the venue on to the mobile viewer.
-
-| Event | Dates | Venue | Time zone | Booth page | Mobile viewer |
-| --- | --- | --- | --- | --- | --- |
-| SC26 Chicago (default) | 2026-11-15 to 11-20 | McCormick Place | America/Chicago | [link](https://nvidia-sc26-chicago.earthmover.io/?location=SC26%20Chicago) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/) |
-| GTC DC | 2026-11-30 to 12-03 | Walter E. Washington Convention Center | America/New_York | [link](https://nvidia-sc26-chicago.earthmover.io/?location=GTC%20DC) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=GTC%20DC) |
-| AGU26 SF | 2026-12-07 to 12-11 | Moscone Center, San Francisco | America/Los_Angeles | [link](https://nvidia-sc26-chicago.earthmover.io/?location=AGU26%20SF) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=AGU26%20SF) |
-| AMS 2027 Denver | 2027-01-10 to 01-14 | Colorado Convention Center | America/Denver | [link](https://nvidia-sc26-chicago.earthmover.io/?location=AMS%202027%20Denver) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=AMS%202027%20Denver) |
-| GTC San Jose | 2027-03-15 to 03-18 | San Jose McEnery Convention Center | America/Los_Angeles | [link](https://nvidia-sc26-chicago.earthmover.io/?location=GTC%20San%20Jose) | [link](https://nvidia-sc26-chicago-viewer.earthmover.io/?location=GTC%20San%20Jose) |
-
-To add an event, add it to `venues` in `presentation/config.json` and to `VENUES` in
-[`site/index.html`](site/index.html), with the same name.
+`venues` in [`presentation/config.json`](presentation/config.json) lists the locations
+(`lat`, `lon`, `timezone`); `location` picks the default. Add `?location=<name>` to the
+booth page to use another one. It sets the "you are here" marker, the day/night default,
+the time zone of the screen, the default SQL place and the demo note. The QR code on the
+screen passes it on to the mobile viewer. To add a location, add it to `venues` and to
+`VENUES` in [`site/index.html`](site/index.html), with the same name.
 
 ## Links
 
 - Earth2Studio example: https://nvidia.github.io/earth2studio/main/examples/04_nowcasting/03_stormscope_goes_example/
 - Arraylake repo: https://app.earthmover.io/nvidia/nvidia-earthmover-stormscope-us
 - Hosted presentation: https://nvidia-sc26-chicago.earthmover.io/. To centre it on another
-  venue, add `?location=` with an event name; [Events](#events) has the link per event. A
+  location, add `?location=` with a name from [Locations](#locations). A
   browser that already allows location access uses its own position instead. See
   ["Here"](presentation/README.md#here) for the rules.
 - Mobile viewer: https://nvidia-sc26-chicago-viewer.earthmover.io/, also with `?location=`.
@@ -87,7 +77,7 @@ To run it on a GPU VM, use Coiled ([docs/GPU.md](docs/GPU.md)) or a Brev launcha
 | | Runs as | Live SQL | Audience | URL |
 |---|---|---|---|---|
 | Booth presentation ([`presentation/`](presentation/README.md)) | `uv run presentation/server.py` on the booth machine, full screen on the TV | editable | SC26 visitors | `http://localhost:8000` on the booth machine |
-| Hosted presentation ([`presentation/`](presentation/README.md#hosted-on-vercel)) | Vercel project `sc26-chicago-stormscope-us-booth`, root directory `presentation` | fixed: the venue queries only, cached per init | internal sharing, unlisted URL | `nvidia-sc26-chicago.earthmover.io` |
+| Hosted presentation ([`presentation/`](presentation/README.md#hosted-on-vercel)) | Vercel project `sc26-chicago-stormscope-us-booth`, root directory `presentation` | fixed: the location queries only, cached per init | internal sharing, unlisted URL | `nvidia-sc26-chicago.earthmover.io` |
 | Mobile site ([`site/`](site/README.md)) | Vercel project `sc26-chicago-stormscope-us-booth-site`, root directory `site`, static | none | phones, through the booth QR code | `nvidia-sc26-chicago-viewer.earthmover.io` |
 
 The domains follow the GTC Berlin pattern. The Vercel project names use only hyphens, so

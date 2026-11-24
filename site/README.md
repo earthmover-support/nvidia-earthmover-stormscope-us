@@ -11,9 +11,9 @@ The page has these controls and behaviours:
 - An init selector.
 - A true color / water vapor toggle. The page starts on water vapor while it is dark at
   the venue (see [Render parameters](../README.md#render-parameters) for why).
-- `?location=<event>` picks the venue from `VENUES` in `index.html` (see
-  [Events](../README.md#events)); the default is SC26 Chicago. It sets the day/night start,
-  the event in the demo note, and the time zone when the browser reports none.
+- `?location=<name>` picks the location from `VENUES` in `index.html` (see
+  [Locations](../README.md#locations)); the default is SC26 Chicago. It sets the day/night start,
+  the name in the demo note, and the time zone when the browser reports none.
 - Playback over lead times. Playback holds the first frame until all leads have loaded.
   Each loop then holds +0 for 2 s and holds the last lead for 0.8 + 2 s.
 - A check for a new init every minute. The page loads a new init in the background and
