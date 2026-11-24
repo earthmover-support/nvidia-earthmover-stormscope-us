@@ -87,7 +87,7 @@
     <div class="row"><div id="lead"></div><button id="collapse" aria-controls="panel" aria-expanded="true" title="Collapse panel">▴</button></div>
     <div class="row" style="margin-top: 8px"><button id="play">❚❚</button><input id="slider" type="range" min="0" value="0" step="1"></div>
   </div>
-  <div id="demo">Temporary demo pipeline for <span id="event">SC26 Chicago</span>. It goes offline after the event.<a id="blog" hidden target="_blank" rel="noopener"> Read the blog post</a></div>
+  <div id="demo">Temporary demo pipeline for <span id="event">Washington DC</span>. It goes offline after the event.<a id="blog" hidden target="_blank" rel="noopener"> Read the blog post</a></div>
   <div id="status">Loading inits…</div>
 </div>
 <script type="module">
@@ -123,7 +123,7 @@ const VENUES = {
   "San Jose": [37.3297, -121.8889, "America/Los_Angeles"],
 };
 const asked = new URLSearchParams(location.search).get("location");
-const EVENT = Object.hasOwn(VENUES, asked ?? "") ? asked : "SC26 Chicago";
+const EVENT = Object.hasOwn(VENUES, asked ?? "") ? asked : "Washington DC";
 const [VENUE_LAT, VENUE_LON, VENUE_TZ] = VENUES[EVENT];
 
 // Keep tiles across variable switches and reloads; see sw.js.

@@ -881,7 +881,7 @@
         .replace("{z}", q.z).replace("{y}", q.y).replace("{x}", q.x);
       type = setQR("qrTiles", new URL(url, location.href).href); // hosted tile_base is relative
     }
-    // always pass the venue: the phone viewer can't read config.json and defaults to SC26 Chicago
+    // always pass the venue: the phone viewer can't read config.json and defaults to Washington DC
     const viewer = `${c.viewer_url}?location=${encodeURIComponent(venue().name)}`;
     setQR("qrViewer", viewer, type);
     setQR("qrViewerCorner", viewer, type, 16); // always-on copy in the strip; white border (4-module quiet zone, SVG units) lives in the SVG so it scales evenly

@@ -82,7 +82,7 @@ The page takes "here" from the first of these that applies:
 2. `?location=<name>` in the page URL, for example `?location=Denver`. Use it to run one
    screen at another location without a config edit. The camera shifts so that the
    location stays on screen. See [Locations](../README.md#locations).
-3. `location` in `config.json`, which is `"SC26 Chicago"`.
+3. `location` in `config.json`, which is `"Washington DC"`.
 
 Options 2 and 3 name an entry in `venues` (`lat`, `lon`, `timezone`), the location
 chips on slide 8. Add a new location there first, and to `VENUES` in

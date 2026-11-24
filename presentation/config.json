@@ -25,7 +25,7 @@
   "hold_first_ms": 2000,
   "hold_ms": 2000,
   "attract_reset_s": 180,
-  "location": "SC26 Chicago",
+  "location": "Washington DC",
   "venues": {
     "SC26 Chicago":  { "lat": 41.8517, "lon": -87.6167,  "timezone": "America/Chicago" },
     "Washington DC": { "lat": 38.8936, "lon": -77.0311,  "timezone": "America/New_York" },
