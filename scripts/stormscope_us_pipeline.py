@@ -10,7 +10,7 @@ composites, `true_color` (day) and `water_vapor` (CIRA Simple Water Vapor RGB, d
 night), and writes one Icechunk commit per init. Each 10-minute rollout step is handed
 to the backend's background writers as it is produced, so uploads overlap inference,
 and the commit at the end of the rollout publishes the whole init at once. It writes to
-the root group of `nvidia/sc26-chicago-stormscope_us-booth` (see ARRAYLAKE_REPO below).
+the root group of `nvidia/nvidia-earthmover-stormscope-us` (see ARRAYLAKE_REPO below).
 Runs accumulate: each one appends its init to `time` in that same commit, so readers
 never see a partly written init.
 
@@ -423,7 +423,7 @@ ZARR_CONVENTIONS = [
 GEOREF = {"coordinates": "lat lon valid_time", "grid_mapping": GRID_MAPPING}
 PUBLISH_TARGETS = ["local", "arraylake"]
 # Default --publish-target arraylake destination; the cube goes in its root group.
-ARRAYLAKE_REPO = "nvidia/sc26-chicago-stormscope_us-booth"
+ARRAYLAKE_REPO = "nvidia/nvidia-earthmover-stormscope-us"
 MODEL_NAME = "3km_10min_flash"
 REGION_PADDING = 25  # real context pixels per side for --region (set_domain)
 

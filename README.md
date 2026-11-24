@@ -1,4 +1,4 @@
-# sc26-chicago-stormscope_us-booth
+# nvidia-earthmover-stormscope-us
 
 [![Launch on Brev](https://brev-assets.s3.us-west-1.amazonaws.com/nv-lb-dark.svg)](https://brev.nvidia.com/launchable/deploy?launchableID=env-3M2pAl81MVfkO3sQbiqFQjKLiQ4)
 
@@ -28,7 +28,7 @@ To add an event, add it to `venues` in `presentation/config.json` and to `VENUES
 ## Links
 
 - Earth2Studio example: https://nvidia.github.io/earth2studio/main/examples/04_nowcasting/03_stormscope_goes_example/
-- Arraylake repo: https://app.earthmover.io/nvidia/sc26-chicago-stormscope_us-booth
+- Arraylake repo: https://app.earthmover.io/nvidia/nvidia-earthmover-stormscope-us
 - Hosted presentation: https://nvidia-sc26-chicago.earthmover.io/. To centre it on another
   venue, add `?location=` with an event name; [Events](#events) has the link per event. A
   browser that already allows location access uses its own position instead. See
@@ -192,7 +192,7 @@ serves the closest older scan without a warning.
 The script uploads each step in the background while it computes the next one. It
 publishes through plain `earth2studio.io.IceChunkBackend`, with
 `arraylake.Client.get_icechunk_storage`, to the root group of
-`nvidia/sc26-chicago-stormscope_us-booth`.
+`nvidia/nvidia-earthmover-stormscope-us`.
 
 Each run makes one commit with the message `stormscope-us <init> lead 0-120 min`. The booth
 server finds each run's snapshot from this message, so keep the format. In that commit,
@@ -215,7 +215,7 @@ uv run python scripts/stormscope_us_pipeline.py --publish-target arraylake
 | `--region` | `$STORMSCOPE_REGION` or full CONUS | `lat_min,lat_max,lon_min,lon_max`, west negative. Flash `set_domain` with 25 px context. The script stores the region cropped. |
 | `--output-dir` | `outputs` | local Icechunk store |
 | `--publish-target` | `$STORMSCOPE_PUBLISH_TARGET` or `local` | `local` or `arraylake` |
-| `--arraylake-repo` | `$ARRAYLAKE_REPO` or `nvidia/sc26-chicago-stormscope_us-booth` | required with `arraylake`, which also needs `ARRAYLAKE_API_TOKEN` |
+| `--arraylake-repo` | `$ARRAYLAKE_REPO` or `nvidia/nvidia-earthmover-stormscope-us` | required with `arraylake`, which also needs `ARRAYLAKE_API_TOKEN` |
 | `--device` | `auto` | `auto`, `cuda` or `cpu` |
 
 The script stores two RGB composites, not the 8 raw channels. Both have the shape

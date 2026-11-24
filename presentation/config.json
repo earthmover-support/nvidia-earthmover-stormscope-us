@@ -1,9 +1,9 @@
 {
   "org": "nvidia",
-  "repo": "nvidia/sc26-chicago-stormscope_us-booth",
+  "repo": "nvidia/nvidia-earthmover-stormscope-us",
   "branch": "main",
 
-  "tile_base": "https://tiles-dd7cd36ec0562874.compute.arraylake.app/v1/services/tiles/nvidia/sc26-chicago-stormscope_us-booth",
+  "tile_base": "https://tiles-dd7cd36ec0562874.compute.arraylake.app/v1/services/tiles/nvidia/nvidia-earthmover-stormscope-us",
   "data_bounds": [-133.712, 21.582, -61.337, 52.145],
   "max_tile_level": 7,
 
@@ -45,7 +45,7 @@
     "box_deg": 0.05,
     "query": [
       "SELECT lead_time, AVG(true_color) AS brightness  -- high means cloudy, low means clear or dark",
-      "FROM \"sc26-chicago-stormscope_us-booth\".\"root\"",
+      "FROM \"nvidia-earthmover-stormscope-us\".\"root\"",
       "WHERE time = TIMESTAMP '{init}'  -- UTC",
       "  AND lat BETWEEN {lat} - {box} AND {lat} + {box}",
       "  AND lon BETWEEN {lon} - {box} AND {lon} + {box}",

@@ -98,7 +98,7 @@ chips on slide 8. Add a new venue there first, and to `VENUES` in
    B=<tile_base from config.json>
    curl -o t.png -w '%{http_code}\n' "$B/main/tiles/WebMercatorQuad/3/2/3?variables=true_color&style=raster/rgb&colorscalerange=0,255&time=<INIT>&lead_time=10%20minutes&ensemble=1&f=png"
    ```
-2. **Inits.** The page reads the root group of `nvidia/sc26-chicago-stormscope_us-booth`.
+2. **Inits.** The page reads the root group of `nvidia/nvidia-earthmover-stormscope-us`.
    The pipeline appends the init of every run to `time` and never drops one. The page
    offers the newest 288 inits (`max_runs`): the past 24 h at one run per 5 min.
 
@@ -181,7 +181,7 @@ variables:
 
 | Variable | Value |
 | --- | --- |
-| `ARRAYLAKE_API_TOKEN` | read-only token with access to `nvidia/sc26-chicago-stormscope_us-booth`. It is also the SQL password. |
+| `ARRAYLAKE_API_TOKEN` | read-only token with access to `nvidia/nvidia-earthmover-stormscope-us`. It is also the SQL password. |
 | `ARRAYLAKE_SQL_HOST` | optional, overrides `sql.host` in `config.json` |
 
 Functions can run for 60 s (`maxDuration`), which is enough for a cold SQL service.

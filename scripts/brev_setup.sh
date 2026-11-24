@@ -11,7 +11,7 @@
 #
 # Setup values:
 #   ARRAYLAKE_API_TOKEN        write token; required unless STORMSCOPE_PUBLISH_TARGET=local
-#   ARRAYLAKE_REPO             default nvidia/sc26-chicago-stormscope_us-booth
+#   ARRAYLAKE_REPO             default nvidia/nvidia-earthmover-stormscope-us
 #   STORMSCOPE_PUBLISH_TARGET  arraylake (default) or local
 #   STORMSCOPE_GIT_REF         branch, tag or commit of this repo; default main
 #
@@ -20,13 +20,13 @@
 set -euo pipefail
 step() { echo "[brev-setup] $(date -u +%H:%M:%S) $*"; }
 
-GIT_URL=https://github.com/earthmover-support/sc26-chicago-stormscope_us-booth.git
+GIT_URL=https://github.com/earthmover-support/nvidia-earthmover-stormscope-us.git
 GIT_REF=${STORMSCOPE_GIT_REF:-main}
 APP_DIR=/opt/stormscope-us
 ENV_FILE=/etc/stormscope-us/env
 UNIT=stormscope-us
 PUBLISH_TARGET=${STORMSCOPE_PUBLISH_TARGET:-arraylake}
-REPO=${ARRAYLAKE_REPO:-nvidia/sc26-chicago-stormscope_us-booth}
+REPO=${ARRAYLAKE_REPO:-nvidia/nvidia-earthmover-stormscope-us}
 
 SUDO=""
 [ "$(id -u)" -eq 0 ] || SUDO="sudo"
