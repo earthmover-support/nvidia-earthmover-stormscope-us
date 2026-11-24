@@ -889,7 +889,6 @@
     // always pass the venue: the phone viewer can't read config.json and defaults to Washington DC
     const viewer = `${c.viewer_url}?location=${encodeURIComponent(venue().name)}`;
     setQR("qrViewer", viewer, type);
-    setQR("qrViewerCorner", viewer, type, 16); // always-on copy in the strip; white border (4-module quiet zone, SVG units) lives in the SVG so it scales evenly
   }
 
   // ------------------------------------------------------------------ SQL
