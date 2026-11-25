@@ -14,6 +14,7 @@ GitHub release with notes on what ran.
 | Event | Dates | Tag |
 |---|---|---|
 | SC26 Chicago, McCormick Place | 2026-11-15/20 | [`sc26-chicago`](https://github.com/earthmover-support/nvidia-earthmover-stormscope-us/releases/tag/sc26-chicago) |
+| GTC DC, Washington DC | 2026-11-30/12-03 | no release yet: [`main`](https://github.com/earthmover-support/nvidia-earthmover-stormscope-us/tree/main) |
 
 ## Locations
 
