@@ -28,11 +28,14 @@ screen passes it on to the mobile viewer. To add a location, add it to `venues` 
 
 - Earth2Studio example: https://nvidia.github.io/earth2studio/main/examples/04_nowcasting/03_stormscope_goes_example/
 - Arraylake repo: https://app.earthmover.io/nvidia/nvidia-earthmover-stormscope-us
-- Hosted presentation: https://nvidia-sc26-chicago.earthmover.io/. To centre it on another
+- Hosted presentation: https://nvidia-earthmover-stormscope-us.earthmover.io/. To centre it on another
   location, add `?location=` with a name from [Locations](#locations). A
   browser that already allows location access uses its own position instead. See
   ["Here"](presentation/README.md#here) for the rules.
-- Mobile viewer: https://nvidia-sc26-chicago-viewer.earthmover.io/, also with `?location=`.
+- Mobile viewer: https://nvidia-earthmover-stormscope-us-viewer.earthmover.io/, also with `?location=`.
+- The SC26 domains `nvidia-sc26-chicago.earthmover.io` and
+  `nvidia-sc26-chicago-viewer.earthmover.io` still serve the same pages, so QR codes
+  printed for SC26 keep working.
 
 [`scripts/stormscope_us_pipeline.py`](scripts/stormscope_us_pipeline.py) runs
 `StormScopeGOES` (`3km_10min_flash`, earth2studio 0.20.0) end to end:
@@ -86,8 +89,8 @@ To run it on a GPU VM, use Coiled ([docs/GPU.md](docs/GPU.md)) or a Brev launcha
 | | Runs as | Live SQL | Audience | URL |
 |---|---|---|---|---|
 | Booth presentation ([`presentation/`](presentation/README.md)) | `uv run presentation/server.py` on the booth machine, full screen on the TV | editable | SC26 visitors | `http://localhost:8000` on the booth machine |
-| Hosted presentation ([`presentation/`](presentation/README.md#hosted-on-vercel)) | Vercel project `sc26-chicago-stormscope-us-booth`, root directory `presentation` | fixed: the location queries only, cached per init | internal sharing, unlisted URL | `nvidia-sc26-chicago.earthmover.io` |
-| Mobile site ([`site/`](site/README.md)) | Vercel project `sc26-chicago-stormscope-us-booth-site`, root directory `site`, static | none | phones, through the booth QR code | `nvidia-sc26-chicago-viewer.earthmover.io` |
+| Hosted presentation ([`presentation/`](presentation/README.md#hosted-on-vercel)) | Vercel project `sc26-chicago-stormscope-us-booth`, root directory `presentation` | fixed: the location queries only, cached per init | internal sharing, unlisted URL | `nvidia-earthmover-stormscope-us.earthmover.io` |
+| Mobile site ([`site/`](site/README.md)) | Vercel project `sc26-chicago-stormscope-us-booth-site`, root directory `site`, static | none | phones, through the booth QR code | `nvidia-earthmover-stormscope-us-viewer.earthmover.io` |
 
 The domains follow the GTC Berlin pattern. The Vercel project names use only hyphens, so
 Vercel does not truncate the `*.vercel.app` fallback domains.
