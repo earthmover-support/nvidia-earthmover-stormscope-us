@@ -6,6 +6,15 @@ The booth demo for SC26 Chicago, McCormick Place, 15 to 20 November 2026. It run
 StormScope-US nowcasts on GOES-19 ABI data over the contiguous US and streams them into
 Arraylake. The deployed pipeline is temporary.
 
+## Events
+
+Each event gets a git tag `<event><yy>-<city>` on the commit that ran at the booth, and a
+GitHub release with notes on what ran.
+
+| Event | Dates | Tag |
+|---|---|---|
+| SC26 Chicago, McCormick Place | 2026-11-15/20 | [`sc26-chicago`](https://github.com/earthmover-support/nvidia-earthmover-stormscope-us/releases/tag/sc26-chicago) |
+
 ## Locations
 
 `venues` in [`presentation/config.json`](presentation/config.json) lists the locations
