@@ -50,6 +50,7 @@ Usage:
 """
 
 import argparse
+import functools
 import os
 import re
 import time
@@ -585,8 +586,47 @@ def _heavy_imports():
     from zarr.codecs import BloscCodec, ZstdCodec
 
 
+BACKPORT_VERSION = "0.20.0"  # the earth2studio release `backport_goes_nan_fill` patches
+
+
+def backport_goes_nan_fill(model_cls) -> None:
+    """Apply the fix of NVIDIA/earth2studio#1421 to the pinned earth2studio 0.20.0.
+
+    Flash GOES treats a gridpoint as missing when any channel of any input frame is NaN
+    there. One band missing from one scan therefore masks every patch, and the forecast
+    is noise (leads +10 min onwards) for each init that has the scan in its input window.
+    The fix zero-fills the raw NaNs before normalization and patch masking, so only the
+    gridpoints outside the GOES view stay masked. In 0.20.0 `_forward` reads nothing but
+    the shape of `x` before that point, so filling its argument is the same change.
+
+    Written against 0.20.0 only. On any other version, or if `_forward` is missing, this
+    raises instead of running without the fix: drop it together with the 0.20.0 pin once
+    the pinned release contains the fix.
+    """
+    forward = getattr(model_cls, "_forward", None)
+    if getattr(forward, "nan_fill_backport", False):
+        return
+    if earth2studio.__version__ != BACKPORT_VERSION or forward is None:
+        raise RuntimeError(
+            f"backport_goes_nan_fill patches {model_cls.__name__}._forward of earth2studio "
+            f"{BACKPORT_VERSION}; found earth2studio {earth2studio.__version__}"
+            f"{'' if forward is not None else ' without that method'}. Remove the backport if "
+            "this version contains NVIDIA/earth2studio#1421, else port it."
+        )
+
+    @functools.wraps(forward)
+    def _forward(self, x, *args, **kwargs):
+        if self._is_flash and self._REGISTRY_KEY == "goes":
+            x = torch.where(torch.isnan(x), 0.0, x)
+        return forward(self, x, *args, **kwargs)
+
+    _forward.nan_fill_backport = True
+    model_cls._forward = _forward
+
+
 def load_model(device, region):
     """Load StormScopeGOES `3km_10min_flash`, optionally restricted to `region`."""
+    backport_goes_nan_fill(StormScopeGOES)
     package = StormScopeBase.load_default_package()
     model = StormScopeGOES.load_model(
         package=package,

@@ -8,9 +8,9 @@ dependencies = [
     # eccodes / eccodeslib, which have no macOS arm64 wheels (eccodeslib is
     # linux-only), so `uv sync` fails on a Mac. The GOES source only needs core
     # deps (obstore, h5netcdf); the Icechunk ingest path is listed below.
-    # From `main` (see [tool.uv.sources]), not a release: no release has the fix for
-    # noisy Flash GOES forecasts when an input band is missing (NVIDIA/earth2studio#1421).
-    "earth2studio",
+    # 0.20.0: first release with StormScopeGOES `3km_10min_flash` and the
+    # IceChunkBackend fix for reopening repos that hold a scalar (CF grid mapping).
+    "earth2studio==0.20.0",
     "pyproj>=3.7.1",
     # contents of the `stormscope` extra, minus earth2studio[utils] and natten (see gpu)
     "nvidia-physicsnemo>=2.2.2",
@@ -51,7 +51,6 @@ gpu = [
 ]
 
 [tool.uv.sources]
-earth2studio = { git = "https://github.com/NVIDIA/earth2studio.git", rev = "18db89dc99542a728b3611297ef48a2eb60c7806" }
 earth2grid = { git = "https://github.com/NVlabs/earth2grid.git", rev = "11dcf1b0787a7eb6a8497a3a5a5e1fdcc31232d3" }
 
 [tool.uv]
